@@ -92,7 +92,7 @@ var tick = function() {
 var getColorFromPalette = function(noiseValue) {
   var palette = palettes[1];
 
-  var c              = assignColor(noiseValue, [4, 3, 2, 3, 4]);
+  var c              = assignColor(noiseValue, [1, 3, 5, 3, 1]);
   var palColorResult = palette[c[0]];
   var palColor       = palColorResult;
 
@@ -118,7 +118,7 @@ var getColorFromPalette = function(noiseValue) {
   var range      = rangeEnd - rangeBegin;           // 32
 
   var rangeMultiplier = (noiseValue - rangeBegin) / range;
-  rangeMultiplier = Math.max(rangeMultiplier, 0.4);
+  rangeMultiplier = Math.max(rangeMultiplier, 0.2);
 
   var r = palColor[0] * rangeMultiplier;
   var g = palColor[1] * rangeMultiplier;
