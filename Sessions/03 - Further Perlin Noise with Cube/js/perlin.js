@@ -165,6 +165,7 @@ var assignColor = function(noiseValue, weights) {
       return [i, weightBegin, weightEnd, totalWeight];
     }
   }
+  return [0, 0, weights[0], totalWeight];
 };
 
 var perlinPlot = function(dt, w, h) {
