@@ -35,14 +35,6 @@ var init = function() {
     new Vector(w / 2 + 10, h / 2 + 40));
   lineSegments.push(lineSegment);
 
-  var lineSegment2 = new LineSegment(
-    new Vector(w / 2 - 30, h / 2 + 30),
-    new Vector(w / 2 - 10, h / 2 - 40));
-  lineSegments.push(lineSegment2);
-
-  intersect = LineSegment.getIntersect(lineSegment, lineSegment2);
-  console.log(intersect);
-
   requestAnimationFrame(tick);
 }
 
@@ -69,7 +61,20 @@ var tick = function() {
     line.draw(ctx);
   }
 
-  drawCircle(intersect);
+  var intersects = [];
+  for (var i = 0; i < lineSegments.length; ++i) {
+    var line = lineSegments[i];
+    var polyIntersects = [];
+    for (var i = 0; i < polygons.length; ++i) {
+      var poly = polygons[i];
+      polyIntersects = poly.getIntersections(line);
+    }
+    intersects = intersects.concat(polyIntersects);
+  }
+
+  for (var i = 0; i < intersects.length; i++) {
+    drawCircle(intersects[i]);
+  };
 
   requestAnimationFrame(tick);
 }

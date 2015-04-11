@@ -57,7 +57,7 @@ Polygon.prototype.draw = function (ctx) {
 Polygon.prototype.getIntersections = function(lineSegment) {
     var segments = this.getLineSegments();
     var intersections = [];
-    
+
     for (var i = 0; i < segments.length; ++i) {
       var intersect = LineSegment.getIntersect(segments[i], lineSegment);
       if (intersect != undefined)
