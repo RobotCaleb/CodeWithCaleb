@@ -1,15 +1,19 @@
 function Polygon(position) {
   this.position = position;
 
-  this.points = [];
-  this.color = 'red';
+  this.points    = [];
+  this.color     = 'red';
   this.numPoints = 0;
-}
+
+  this.bounds = {};
+};
 
 Polygon.prototype.addPoint = function (point) {
   ++this.numPoints;
   this.points.push(point);
-}
+
+  this.bounds = new BoundingBox(this);
+};
 
 Polygon.prototype.getLineSegments = function () {
   var segments = [];
@@ -39,7 +43,7 @@ Polygon.prototype.getLineSegments = function () {
   segments.push(segment);
 
   return segments;
-}
+};
 
 Polygon.prototype.draw = function (ctx) {
   if (this.numPoints < 3) {
@@ -52,7 +56,7 @@ Polygon.prototype.draw = function (ctx) {
     var segment = segments[i];
     segment.draw(ctx);
   }
-}
+};
 
 Polygon.prototype.getIntersections = function(lineSegment) {
     var segments = this.getLineSegments();
@@ -60,9 +64,12 @@ Polygon.prototype.getIntersections = function(lineSegment) {
 
     for (var i = 0; i < segments.length; ++i) {
       var intersect = LineSegment.getIntersect(segments[i], lineSegment);
-      if (intersect != undefined)
-        intersections.push(intersect);
+      if (intersect !== undefined)
+      {
+        if (this.bounds.ContainsPoint(intersect))
+          intersections.push(intersect);
+      }
     }
 
     return intersections;
-}
+};

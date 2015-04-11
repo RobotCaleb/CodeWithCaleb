@@ -3,6 +3,10 @@ function Vector(x, y) {
   this.y = y;
 }
 
+Vector.zero = function() {
+  return new Vector(0, 0);
+}
+
 Vector.prototype.mul = function(scalar) {
   return new Vector(this.x * scalar, this.y * scalar);
 };
