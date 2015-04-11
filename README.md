@@ -6,3 +6,6 @@ Playing with Perlin noise with JavaScript on an HTML5 canvas
 
 ## [Session 3](./Sessions/03 - Further Perlin Noise with Cube)
 Further playing with Perlin noise with Cube (Pair programming!)
+
+## [Session 4](./Sessions/04 - Polygon Ninja with Robert)
+Creating a small game with Robert (Pair programming!)
