@@ -10,6 +10,7 @@ var backgroundColor = rgb(255, 255, 0);
 var lastUpdate = 0;
 
 var polygons = [];
+var lineSegments = [];
 
 var init = function() {
   canvas = document.getElementById('canvas');
@@ -27,6 +28,11 @@ var init = function() {
   poly.addPoint(new Vector(-20, -20));
   poly.addPoint(new Vector( 20, -20));
   polygons.push(poly);
+
+  var lineSegment = new LineSegment(
+    new Vector(w / 2 - 30, h / 2 - 30),
+    new Vector(w / 2 + 10, h / 2 + 40));
+  lineSegments.push(lineSegment);
 
   requestAnimationFrame(tick);
 }
@@ -47,6 +53,11 @@ var tick = function() {
   for (var i = 0; i < polygons.length; ++i) {
     var poly = polygons[i];
     poly.draw(ctx);
+  }
+
+  for (var i = 0; i < lineSegments.length; ++i) {
+    var line = lineSegments[i];
+    line.draw(ctx);
   }
 
   requestAnimationFrame(tick);
