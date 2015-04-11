@@ -11,6 +11,7 @@ var lastUpdate = 0;
 
 var polygons = [];
 var lineSegments = [];
+var intersect = {};
 
 var init = function() {
   canvas = document.getElementById('canvas');
@@ -33,6 +34,14 @@ var init = function() {
     new Vector(w / 2 - 30, h / 2 - 30),
     new Vector(w / 2 + 10, h / 2 + 40));
   lineSegments.push(lineSegment);
+
+  var lineSegment2 = new LineSegment(
+    new Vector(w / 2 - 30, h / 2 + 30),
+    new Vector(w / 2 - 10, h / 2 - 40));
+  lineSegments.push(lineSegment2);
+
+  intersect = LineSegment.getIntersect(lineSegment, lineSegment2);
+  console.log(intersect);
 
   requestAnimationFrame(tick);
 }
@@ -60,6 +69,8 @@ var tick = function() {
     line.draw(ctx);
   }
 
+  drawCircle(intersect);
+
   requestAnimationFrame(tick);
 }
 
@@ -79,6 +90,17 @@ var resize = function() {
 var fillCanvas = function(color) {
   ctx.fillStyle = color;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+var drawCircle = function(point, radius, color) {
+  //draw a circle
+  var c = color  == undefined ? 'black' : color;
+  var r = radius == undefined ? 2       : radius;
+  ctx.beginPath();
+  ctx.fillStyle = c;
+  ctx.arc(point.x, point.y, r, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.fill();
 }
 
 var shiftCanvas = function (dirX) {
